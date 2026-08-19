@@ -1,11 +1,20 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig, lazyPlugins } from "vite-plus";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import { VitePWA } from "vite-plugin-pwa";
 
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // https://vite.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(dirname, "./src"),
+    },
+  },
   staged: {
     "*": "vp check --fix",
   },
